@@ -1,19 +1,18 @@
 import tornado.ioloop
-import tornado.web
+from tornado.httpserver import HTTPServer
+from tornado.routing import PathMatches, Rule, RuleRouter
+from tornado.web import Application
+
+from api import make_api
 
 
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Hello, world")
-
-
-def make_app():
-    return tornado.web.Application([
-        (r"/", MainHandler),
-    ])
+def make_server():
+    api = make_api()
+    router = RuleRouter([Rule(PathMatches('/api/.*'), api)])
+    return HTTPServer(router)
 
 
 if __name__ == "__main__":
-    app = make_app()
-    app.listen(8888)
+    server = make_server()
+    server.listen(8888)
     tornado.ioloop.IOLoop.current().start()
