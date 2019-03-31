@@ -14,3 +14,14 @@ class CompaniesHandler(JsonHandler):
 
     def post(self):
         return self.write(json.dumps({"name": "Company name"}))
+
+
+class CompanyHandler(JsonHandler):
+    def get(self, id):
+        return self.write(json.dumps({"id": id, "name": "Company"}))
+
+    def delete(self, id):
+        return self.write(json.dumps({"id": id, "name": "Company"}))
+
+    def patch(self, id):
+        return self.write(json.dumps({"id": id, "name": "Company"}))

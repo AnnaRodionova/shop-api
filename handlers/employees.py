@@ -9,3 +9,14 @@ class EmployeesHandler(JsonHandler):
 
     def post(self):
         return self.write(json.dumps({"emp": "Name"}))
+
+
+class EmployeeHandler(JsonHandler):
+    def get(self, id):
+        return self.write(json.dumps([{"id": id, "emp": "Emp"}]))
+
+    def delete(self, id):
+        return self.write(json.dumps([{"id": id, "emp": "Emp"}]))
+
+    def patch(self, id):
+        return self.write(json.dumps([{"id": id, "emp": "Emp"}]))
